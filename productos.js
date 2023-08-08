@@ -1,32 +1,26 @@
+class Planta {
+  constructor(codigo, nombre, precio) {
+    this.codigo = codigo;
+    this.nombre = nombre;
+    this.precio = precio;
+  }
+}
+
 const usuario = prompt("Tu nombre de usuario");
 const contrasenia = prompt("Tu contraseña");
 
 const plantas = [
-  {
-    codigo: "1",
-    nombre: "Rosa China",
-    precio: 1800,
-  },
-  {
-    codigo: "2",
-    nombre: "Palmeras",
-    precio: 5300,
-  },
-  {
-    codigo: "3",
-    nombre: "Heliconia",
-    precio: 3600,
-  },
-  {
-    codigo: "4",
-    nombre: "Strelitzia",
-    precio: 2800,
-  },
+  new Planta("1", "Rosa China", 1800),
+  new Planta("2", "Palmeras", 5300),
+  new Planta("3", "Heliconia", 3600),
+  new Planta("4", "Strelitzia", 2800),
 ];
 
 function mostrarCuotas() {
   console.log("Nuestras plantas tienen:");
-  for (let i = 1; i <= 6; i++) console.log(i + " Cuotas sin interés");
+  for (let i = 1; i <= 6; i++) {
+    console.log(i + " Cuotas sin interés");
+  }
 }
 
 function mostrarPrecio(codigo) {
@@ -43,7 +37,7 @@ function mostrarPrecio(codigo) {
 function consultarPlantas() {
   const respuesta = confirm("¿Quieres saber cuáles son nuestros precios?");
   if (respuesta) {
-    let codigo = prompt(
+    const codigo = prompt(
       "Ingrese el código de la planta que desea adquirir (1-4)"
     );
     mostrarPrecio(codigo);
