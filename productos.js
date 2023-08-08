@@ -16,40 +16,35 @@ const plantas = [
   new Planta("4", "Strelitzia", 2800),
 ];
 
-function mostrarCuotas() {
-  console.log("Nuestras plantas tienen:");
-  for (let i = 1; i <= 6; i++) {
-    console.log(i + " Cuotas sin interés");
-  }
+function filtrarPorPrecio(listaPlantas, precioMax) {
+  return listaPlantas.filter((planta) => planta.precio <= precioMax);
 }
 
-function mostrarPrecio(codigo) {
-  const plantaSeleccionada = plantas.find((planta) => planta.codigo === codigo);
-  if (plantaSeleccionada) {
-    console.log(
-      `El precio de las ${plantaSeleccionada.nombre} es de: $${plantaSeleccionada.precio}`
-    );
-  } else {
-    console.warn("Lo que usted pide no está disponible");
-  }
+function renderizarProductos(listaProds) {
+  console.table(listaProds);
 }
 
-function consultarPlantas() {
-  const respuesta = confirm("¿Quieres saber cuáles son nuestros precios?");
-  if (respuesta) {
-    const codigo = prompt(
-      "Ingrese el código de la planta que desea adquirir (1-4)"
-    );
-    mostrarPrecio(codigo);
-    mostrarCuotas();
-  } else {
-    console.log("Gracias por visitarnos, te esperamos pronto");
-  }
-}
-
+// Validación de usuario y contraseña
 if (usuario === "juan" && contrasenia === "1234") {
   alert("Bienvenido Juan!!");
-  consultarPlantas();
+  let precioUsuario = parseFloat(
+    prompt("Ingresa el precio máximo que puedes abonar (0-salir)")
+  );
+
+  while (precioUsuario !== 0) {
+    if (isNaN(precioUsuario) || precioUsuario < 0) {
+      alert("Por favor, ingrese un número válido 😲");
+    } else {
+      const prodsFiltrados = filtrarPorPrecio(plantas, precioUsuario);
+      renderizarProductos(prodsFiltrados);
+    }
+    // Preguntamos nuevamente
+    precioUsuario = parseFloat(
+      prompt("Ingresa el precio máximo que puedes abonar (0-salir)")
+    );
+  }
+
+  console.log("Gracias por visitarnos, te esperamos pronto");
 } else {
   alert("Usuario y/o contraseña incorrectos");
 }
